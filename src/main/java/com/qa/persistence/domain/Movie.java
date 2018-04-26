@@ -18,12 +18,12 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(Long id, String title, String genre, String year) {
+	public Movie(Long id, String title, String genre, String rating) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.genre = genre;
-		this.rating = year;
+		this.rating = rating;
 	}
 
 	public Long getId() {

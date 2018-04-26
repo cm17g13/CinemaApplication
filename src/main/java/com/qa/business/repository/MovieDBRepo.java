@@ -33,6 +33,15 @@ public class MovieDBRepo implements MovieRepoInterface {
 		return jsonConverter.getJSONForObject(movies);
 	}
 	
+	public String findAMovie(Long id) {
+		Movie movie = findMovie(id);
+		if(movie != null) {
+			return jsonConverter.getJSONForObject(movie);
+		} 
+		return "{\"message\": \"movie was not found\"}";
+		
+	}
+	
 	@Transactional(REQUIRED)
 	public String createNewMovie(String movie) {
 		Movie newMovie = jsonConverter.getObjectForJSON(movie, Movie.class);
@@ -60,7 +69,7 @@ public class MovieDBRepo implements MovieRepoInterface {
 		return "{\"message\": \"movie sucessfully deleted\"}";
 	}
 
-	private Movie findMovie(Long id) {
+	public Movie findMovie(Long id) {
 		return manager.find(Movie.class, id);
 	}
 

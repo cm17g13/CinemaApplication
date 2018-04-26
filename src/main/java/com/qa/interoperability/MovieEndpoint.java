@@ -16,4 +16,34 @@ public class MovieEndpoint {
 	public String getAllMovies() {
 		return service.getAllMovies();
 	}
+	
+	
+	@GET
+	@Path("/json/{id}")
+	@Produces({"application/json"})
+	public String findAMovie(@PathParam("id") Long id) {
+		return service.findAMovie(id);
+	}
+	
+	@POST
+	@Path("/json")
+	@Produces({ "application/json" })
+	public String createMovie(String movie) {
+		return service.createNewMovie(movie);
+	}
+
+	@PUT
+	@Path("/json/{id}")
+	@Produces({"application/json"})
+	public String updateMovie(@PathParam("id") Long id, String movie) {
+		return service.updateMovie(id, movie);
+	}
+	
+	@DELETE
+	@Path("/json/{id}")
+	@Produces({"application/json"})
+	public String deleteMovie(@PathParam("id") Long id) {
+		return service.deleteMovie(id);
+	}
+	
 }

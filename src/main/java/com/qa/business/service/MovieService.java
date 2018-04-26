@@ -3,6 +3,7 @@ package com.qa.business.service;
 import javax.inject.Inject;
 
 import com.qa.business.repository.MovieRepoInterface;
+import com.qa.persistence.domain.Movie;
 
 public class MovieService implements MovieServiceInterface {
 
@@ -14,16 +15,25 @@ public class MovieService implements MovieServiceInterface {
 		return repo.getAllMovies();
 	}
 	
-	public String create(String movie) {
+	public String findAMovie(Long id) {
+		return repo.findAMovie(id);
+	}
+	
+	public String createNewMovie(String movie) {
 		return repo.createNewMovie(movie);
 	}
 	
-	public String update(Long id,String movie) {
+	public String updateMovie(Long id,String movie) {
 		return repo.updateMovie(id, movie);
 	}
 	
-	public String delete(Long id) {
+	public String deleteMovie(Long id) {
 		return repo.deleteMovie(id);
+	}
+
+	@Override
+	public Movie findMovie(Long id) {
+		return repo.findMovie(id);
 	}
 	
 
