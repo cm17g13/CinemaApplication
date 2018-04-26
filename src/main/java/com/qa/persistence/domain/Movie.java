@@ -18,9 +18,7 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(Long id, String title, String genre, String rating) {
-		super();
-		this.id = id;
+	public Movie(String title, String genre, String rating) {
 		this.title = title;
 		this.genre = genre;
 		this.rating = rating;

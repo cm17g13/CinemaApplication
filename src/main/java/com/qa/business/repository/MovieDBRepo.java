@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import static javax.transaction.Transactional.TxType.*;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+import javax.transaction.*;
 
 import org.apache.log4j.Logger;
 
@@ -50,23 +50,24 @@ public class MovieDBRepo implements MovieRepoInterface {
 	}
 
 	@Transactional(REQUIRED)
-	public String updateMovie(Long movieId, String movie) {
+	public String updateMovie(String movie) {
 		Movie updateMovie = jsonConverter.getObjectForJSON(movie, Movie.class);
-		Movie movieInDB = findMovie(new Long(movieId));
-		if (movieInDB != null) {
-			movieInDB = updateMovie;
-			manager.merge(movie);
+		if (findMovie(updateMovie.getId()) != null) {
+			manager.merge(updateMovie);
+			return"{\"message\": \"movie sucessfully updated\"}";
 		}
-		return "{\"message\": \"movie sucessfully updated\"}";
+		return "{\"message\": \"movie doesn't exist, could not updated\"}";
 	}
 
 	@Transactional(REQUIRED)
-	public String deleteMovie(Long movieId) {
-		Movie movieInDB = findMovie(new Long(movieId));
-		if (movieInDB != null) {
-			manager.remove(movieInDB);
+	public String deleteMovie(Long id) {
+		Movie movieToDelete = findMovie(id);
+		if (movieToDelete != null) {
+			manager.remove(movieToDelete);
+			return "{\"message\": \"movie sucessfully deleted\"}";
 		}
-		return "{\"message\": \"movie sucessfully deleted\"}";
+		return "{\"message\": \"movie was not found, could not be deleted\"}";
+		
 	}
 
 	public Movie findMovie(Long id) {

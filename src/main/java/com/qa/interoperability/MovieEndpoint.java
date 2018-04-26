@@ -27,16 +27,16 @@ public class MovieEndpoint {
 	
 	@POST
 	@Path("/json")
-	@Produces({ "application/json" })
+	@Produces({"application/json"})
 	public String createMovie(String movie) {
 		return service.createNewMovie(movie);
 	}
 
 	@PUT
-	@Path("/json/{id}")
+	@Path("/json")
 	@Produces({"application/json"})
-	public String updateMovie(@PathParam("id") Long id, String movie) {
-		return service.updateMovie(id, movie);
+	public String updateMovie(String movie) {
+		return service.updateMovie(movie);
 	}
 	
 	@DELETE

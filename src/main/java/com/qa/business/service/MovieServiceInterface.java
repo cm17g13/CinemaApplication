@@ -10,7 +10,7 @@ public interface MovieServiceInterface {
 	
 	public String createNewMovie(String movie);
 
-	public String updateMovie(Long id, String movie);
+	public String updateMovie(String movie);
 
 	public String deleteMovie(Long id);
 	
