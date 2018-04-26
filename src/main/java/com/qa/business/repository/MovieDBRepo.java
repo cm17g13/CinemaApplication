@@ -50,13 +50,23 @@ public class MovieDBRepo implements MovieRepoInterface {
 	}
 
 	@Transactional(REQUIRED)
-	public String updateMovie(String movie) {
+	public String updateMovie(Movie movie) {
+		if(movie != null) {
+			manager.merge(movie);
+			return"{\"message\": \"movie sucessfully updated\"}"; 
+		}
+		return "{\"message\": \"movie doesn't exist, could not updated\"}";
+		
+		/*
 		Movie updateMovie = jsonConverter.getObjectForJSON(movie, Movie.class);
+		Movie existingMovie = findMovie(updateMovie.getId());
+		
 		if (findMovie(updateMovie.getId()) != null) {
 			manager.merge(updateMovie);
 			return"{\"message\": \"movie sucessfully updated\"}";
 		}
 		return "{\"message\": \"movie doesn't exist, could not updated\"}";
+		*/
 	}
 
 	@Transactional(REQUIRED)
@@ -72,6 +82,10 @@ public class MovieDBRepo implements MovieRepoInterface {
 
 	public Movie findMovie(Long id) {
 		return manager.find(Movie.class, id);
+	}
+	
+	public JSONUtil getConverter() {
+		return this.jsonConverter;
 	}
 
 }

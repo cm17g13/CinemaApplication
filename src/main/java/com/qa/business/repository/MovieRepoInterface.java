@@ -1,8 +1,9 @@
 package com.qa.business.repository;
 
 import com.qa.persistence.domain.Movie;
+import com.qa.util.JSONUtil;
 
-public interface MovieRepoInterface {
+public interface MovieRepoInterface  {
 	
 	public String getAllMovies();
 
@@ -10,10 +11,12 @@ public interface MovieRepoInterface {
 	
 	public String createNewMovie(String movie);
 
-	public String updateMovie(String movie);
+	public String updateMovie(Movie movie);
 
 	public String deleteMovie(Long id);
 	
 	public Movie findMovie(Long id);
+	
+	public JSONUtil getConverter();
 
 }
